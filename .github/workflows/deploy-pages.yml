@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 将来的に公開する際は、以下のコメントアウト（#）を外してください。
+  # mainブランチへのプッシュ時に自動デプロイが実行されるようになります。
+  # push:
+  #   branches: ["main"]
+
+  # 手動でデプロイを実行できるようにする設定
+  workflow_dispatch:
+
+# GITHUB_TOKEN の権限を設定し、Pages へのデプロイを許可
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 複数回の同時デプロイを防ぐ
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # デプロイジョブ
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # リポジトリのルートディレクトリ全体をアップロード
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
