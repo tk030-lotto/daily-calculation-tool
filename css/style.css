@@ -1,33 +1,30 @@
 /* ===================================================
-   日常計算ツール - スタイルシート (css/style.css)
+   日常計算ツール - プロジェクト統計ツール準拠 ダークUI (css/style.css)
    =================================================== */
 
 :root {
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-light: #eef2ff;
-  --secondary: #64748b;
-  --secondary-hover: #475569;
-  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-  --surface: #ffffff;
-  --surface-alt: #f8fafc;
-  --border: #e2e8f0;
-  --border-focus: #818cf8;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --success-bg: #ecfdf5;
-  --success-text: #065f46;
-  --success-border: #a7f3d0;
-  --error-bg: #fef2f2;
-  --error-text: #991b1b;
-  --error-border: #fecaca;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 25px -5px rgba(79, 70, 229, 0.1), 0 8px 10px -6px rgba(79, 70, 229, 0.05);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-app: #09090b;
+  --surface-card: #121215;
+  --surface-item: #18181b;
+  --border: #27272a;
+  --border-focus: #3f3f46;
+  --text-main: #f4f4f5;
+  --text-sub: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-emerald: #10b981;
+  --accent-emerald-light: rgba(16, 185, 129, 0.12);
+  --btn-primary-bg: #f4f4f5;
+  --btn-primary-text: #09090b;
+  --btn-primary-hover: #e4e4e7;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --error-border: rgba(239, 68, 68, 0.3);
+  --error-text: #fca5a5;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition: all 0.18s ease-in-out;
+  --font-base: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 *, *::before, *::after {
@@ -37,8 +34,8 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: var(--bg-gradient);
+  font-family: var(--font-base);
+  background-color: var(--bg-app);
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
@@ -55,56 +52,56 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 /* ヘッダー */
 .app-header {
   text-align: center;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .logo-badge {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: var(--primary-light);
-  color: var(--primary);
-  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: var(--surface-item);
+  color: var(--accent-emerald);
+  padding: 3px 10px;
   border-radius: 9999px;
   margin-bottom: 8px;
-  border: 1px solid #c7d2fe;
+  border: 1px solid var(--border);
 }
 
 .app-title {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 1.65rem;
+  font-weight: 700;
   color: var(--text-main);
   letter-spacing: -0.02em;
 }
 
 .app-subtitle {
-  font-size: 0.875rem;
-  color: var(--text-muted);
+  font-size: 0.825rem;
+  color: var(--text-sub);
   margin-top: 4px;
 }
 
 /* メインカード */
 .main-card {
-  background: var(--surface);
+  background: var(--surface-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* タブナビゲーション */
 .tabs-nav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: var(--surface-alt);
+  background: rgba(18, 18, 21, 0.8);
   border-bottom: 1px solid var(--border);
   padding: 6px;
   gap: 6px;
@@ -112,9 +109,9 @@ body {
 
 .tab-btn {
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  padding: 10px 4px;
+  padding: 9px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,29 +122,29 @@ body {
 }
 
 .tab-btn:hover {
-  color: var(--primary);
-  background: rgba(79, 70, 229, 0.04);
+  color: var(--text-sub);
+  background: var(--surface-item);
 }
 
 .tab-btn.active {
-  background: var(--surface);
-  color: var(--primary);
-  font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  background: var(--surface-item);
+  color: var(--text-main);
+  border-color: var(--border);
+  font-weight: 600;
 }
 
 .tab-icon {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 
 .tab-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   white-space: nowrap;
 }
 
 /* パネルエリア */
 .tab-contents {
-  padding: 24px;
+  padding: 22px;
 }
 
 .tab-panel {
@@ -156,41 +153,35 @@ body {
 
 .tab-panel.active {
   display: block;
-  animation: fadeIn 0.25s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .panel-header {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .panel-title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--text-main);
 }
 
 .panel-desc {
-  font-size: 0.825rem;
-  color: var(--text-muted);
-  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  margin-top: 3px;
 }
 
 /* フォーム要素 */
 .calc-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .form-group {
@@ -200,9 +191,9 @@ body {
 }
 
 .form-label {
-  font-size: 0.825rem;
-  font-weight: 600;
-  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-sub);
 }
 
 .required {
@@ -211,19 +202,20 @@ body {
 
 .form-input {
   width: 100%;
-  padding: 10px 12px;
-  font-size: 0.95rem;
+  padding: 9px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
   color: var(--text-main);
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--surface-item);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   transition: var(--transition);
   outline: none;
 }
 
 .form-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  border-color: var(--border-focus);
+  background: #202024;
 }
 
 .input-with-suffix {
@@ -233,13 +225,13 @@ body {
 }
 
 .input-with-suffix .form-input {
-  padding-right: 40px;
+  padding-right: 36px;
 }
 
 .input-suffix {
   position: absolute;
   right: 12px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   pointer-events: none;
 }
@@ -255,15 +247,16 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-sub);
   cursor: pointer;
   user-select: none;
 }
 
 .radio-label input, .checkbox-label input {
-  accent-color: var(--primary);
-  width: 18px;
-  height: 18px;
+  accent-color: var(--accent-emerald);
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
@@ -275,8 +268,8 @@ body {
 }
 
 .btn {
-  padding: 11px 18px;
-  font-size: 0.9rem;
+  padding: 9px 16px;
+  font-size: 0.85rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
   border: none;
@@ -288,77 +281,75 @@ body {
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: #ffffff;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   flex: 1;
 }
 
 .btn-primary:hover {
-  background: var(--primary-hover);
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  background: var(--btn-primary-hover);
 }
 
 .btn-secondary {
-  background: var(--surface-alt);
-  color: var(--secondary);
+  background: var(--surface-item);
+  color: var(--text-sub);
   border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-  background: var(--border);
+  background: #27272a;
   color: var(--text-main);
 }
 
 /* 結果表示ボックス */
 .result-box {
-  margin-top: 24px;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
+  margin-top: 20px;
 }
 
 .result-placeholder {
-  padding: 20px;
+  padding: 16px;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  border: 1.5px dashed var(--border);
+  border: 1px dashed var(--border);
   border-radius: var(--radius-md);
-  background: var(--surface-alt);
+  background: rgba(24, 24, 27, 0.5);
 }
 
 .result-card {
-  padding: 20px;
+  padding: 18px;
   border-radius: var(--radius-md);
-  border: 1.5px solid var(--border);
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface-item);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  animation: fadeIn 0.2s ease-out;
+  gap: 10px;
 }
 
 .result-card.success {
-  border-color: #c7d2fe;
-  background: linear-gradient(to bottom, #ffffff, #f5f7ff);
+  border-color: rgba(16, 185, 129, 0.3);
+  background: linear-gradient(180deg, #18181b 0%, #131d18 100%);
 }
 
 .result-card.error {
   background: var(--error-bg);
   border-color: var(--error-border);
   color: var(--error-text);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .result-badge {
-  font-size: 0.725rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--primary);
-  background: var(--primary-light);
+  color: var(--accent-emerald);
+  background: var(--accent-emerald-light);
   display: inline-block;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
   width: fit-content;
 }
 
@@ -369,22 +360,23 @@ body {
 }
 
 .result-value {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-main);
   line-height: 1.1;
-  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
 }
 
 .result-unit {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-sub);
 }
 
 .result-sub {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.825rem;
+  color: var(--text-sub);
   border-top: 1px solid var(--border);
   padding-top: 10px;
   display: flex;
@@ -397,14 +389,19 @@ body {
   justify-content: space-between;
 }
 
+.result-row strong {
+  color: var(--text-main);
+  font-family: var(--font-mono);
+}
+
 /* フッター */
 .app-footer {
   text-align: center;
-  padding: 12px 0 24px;
+  padding: 8px 0 20px;
 }
 
 .footer-text {
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   color: var(--text-muted);
 }
 
@@ -419,18 +416,18 @@ body {
   }
 
   .tab-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
   .tab-icon {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .tab-contents {
-    padding: 18px 14px;
+    padding: 16px 12px;
   }
 
   .result-value {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
 }
