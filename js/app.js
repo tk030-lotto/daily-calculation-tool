@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.error) {
       resultAgeBox.innerHTML = `
         <div class="result-card error" role="alert">
-          <strong>入力エラー:</strong> ${res.error}
+          <strong>入力エラー:</strong> ${DateUtils.escapeHTML(res.error)}
         </div>`;
       return;
     }
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="result-sub">
           <div class="result-row">
             <span>経過期間:</span>
-            <strong>${res.periodText}</strong>
+            <strong>${DateUtils.escapeHTML(res.periodText)}</strong>
           </div>
           <div class="result-row">
             <span>生まれてからの総日数:</span>
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.error) {
       resultDateBox.innerHTML = `
         <div class="result-card error" role="alert">
-          <strong>入力エラー:</strong> ${res.error}
+          <strong>入力エラー:</strong> ${DateUtils.escapeHTML(res.error)}
         </div>`;
       return;
     }
@@ -119,18 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resultDateBox.innerHTML = `
       <div class="result-card success">
-        <span class="result-badge">${directionLabel} の日付</span>
+        <span class="result-badge">${DateUtils.escapeHTML(directionLabel)} の日付</span>
         <div class="result-main">
-          <span class="result-value" style="font-size: 1.5rem;">${res.formattedJapanese}</span>
+          <span class="result-value" style="font-size: 1.5rem;">${DateUtils.escapeHTML(res.formattedJapanese)}</span>
         </div>
         <div class="result-sub">
           <div class="result-row">
             <span>ISO形式:</span>
-            <strong>${res.dateString}</strong>
+            <strong>${DateUtils.escapeHTML(res.dateString)}</strong>
           </div>
           <div class="result-row">
             <span>基準日:</span>
-            <span>${baseVal}</span>
+            <span>${DateUtils.escapeHTML(baseVal)}</span>
           </div>
         </div>
       </div>`;
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.error) {
       resultPeriodBox.innerHTML = `
         <div class="result-card error" role="alert">
-          <strong>入力エラー:</strong> ${res.error}
+          <strong>入力エラー:</strong> ${DateUtils.escapeHTML(res.error)}
         </div>`;
       return;
     }
@@ -191,11 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="result-sub">
           <div class="result-row">
             <span>暦上の期間:</span>
-            <strong>${res.periodText}</strong>
+            <strong>${DateUtils.escapeHTML(res.periodText)}</strong>
           </div>
           <div class="result-row">
             <span>期間:</span>
-            <span>${startVal} 〜 ${endVal}</span>
+            <span>${DateUtils.escapeHTML(startVal)} 〜 ${DateUtils.escapeHTML(endVal)}</span>
           </div>
         </div>
       </div>`;
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.error) {
       resultTimeBox.innerHTML = `
         <div class="result-card error" role="alert">
-          <strong>入力エラー:</strong> ${res.error}
+          <strong>入力エラー:</strong> ${DateUtils.escapeHTML(res.error)}
         </div>`;
       return;
     }
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="result-row">
             <span>対象区間:</span>
-            <span>${startVal} → ${isNextDay ? '翌日 ' : ''}${endVal}</span>
+            <span>${DateUtils.escapeHTML(startVal)} → ${isNextDay ? '翌日 ' : ''}${DateUtils.escapeHTML(endVal)}</span>
           </div>
         </div>
       </div>`;

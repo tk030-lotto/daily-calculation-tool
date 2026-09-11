@@ -49,17 +49,25 @@
       // 経過期間（○年○か月○日）の暦上計算
       let years = base.year - birth.year;
       let months = base.month - birth.month;
-      let days = base.day - birth.day;
+      
+      let prevMonth = base.month - 1;
+      let prevYear = base.year;
+      if (prevMonth < 1) {
+        prevMonth = 12;
+        prevYear--;
+      }
+      const daysInPrevMonth = DateUtils.getDaysInMonth(prevYear, prevMonth);
+      
+      let adjustedBirthDay = birth.day;
+      if (adjustedBirthDay > daysInPrevMonth) {
+        adjustedBirthDay = daysInPrevMonth;
+      }
+      
+      let days = base.day - adjustedBirthDay;
 
       if (days < 0) {
         months--;
-        let prevMonth = base.month - 1;
-        let prevYear = base.year;
-        if (prevMonth < 1) {
-          prevMonth = 12;
-          prevYear--;
-        }
-        days += DateUtils.getDaysInMonth(prevYear, prevMonth);
+        days += daysInPrevMonth;
       }
 
       if (months < 0) {

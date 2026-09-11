@@ -33,17 +33,25 @@
       // 暦上の期間（○年○か月○日）の計算
       let years = end.year - start.year;
       let months = end.month - start.month;
-      let days = end.day - start.day;
+      
+      let prevMonth = end.month - 1;
+      let prevYear = end.year;
+      if (prevMonth < 1) {
+        prevMonth = 12;
+        prevYear--;
+      }
+      const daysInPrevMonth = DateUtils.getDaysInMonth(prevYear, prevMonth);
+      
+      let adjustedStartDay = start.day;
+      if (adjustedStartDay > daysInPrevMonth) {
+        adjustedStartDay = daysInPrevMonth;
+      }
+      
+      let days = end.day - adjustedStartDay;
 
       if (days < 0) {
         months--;
-        let prevMonth = end.month - 1;
-        let prevYear = end.year;
-        if (prevMonth < 1) {
-          prevMonth = 12;
-          prevYear--;
-        }
-        days += DateUtils.getDaysInMonth(prevYear, prevMonth);
+        days += daysInPrevMonth;
       }
 
       if (months < 0) {

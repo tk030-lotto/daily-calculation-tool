@@ -68,6 +68,19 @@
         month: d.getUTCMonth() + 1,
         day: d.getUTCDate()
       };
+    },
+
+    /**
+     * XSS対策用のHTMLエスケープ関数
+     */
+    escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
   };
 
