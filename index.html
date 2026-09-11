@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ブラウザで簡単に使える年齢・日付・期間・時間の日常計算Webツール。外部API・DB不要、安心の完全クライアントサイド動作。">
+  <title>日常計算ツール | 年齢・日付・期間・時間の簡単計算</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo-badge">Daily Calc</div>
+        <h1 class="app-title">日常計算ツール</h1>
+        <p class="app-subtitle">年齢・日付・期間・時間をすばやく正確に計算</p>
+      </div>
+    </header>
+
+    <main class="main-card">
+      <!-- ナビゲーションタブ -->
+      <nav class="tabs-nav" aria-label="計算機能の切り替え">
+        <button type="button" class="tab-btn active" data-tab="age" id="tab-btn-age">
+          <span class="tab-icon">🎂</span>
+          <span class="tab-label">年齢計算</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="date" id="tab-btn-date">
+          <span class="tab-icon">📅</span>
+          <span class="tab-label">日付計算</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="period" id="tab-btn-period">
+          <span class="tab-icon">⏳</span>
+          <span class="tab-label">期間計算</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="time" id="tab-btn-time">
+          <span class="tab-icon">⏱️</span>
+          <span class="tab-label">時間計算</span>
+        </button>
+      </nav>
+
+      <!-- パネルコンテナ -->
+      <div class="tab-contents">
+        <!-- 1. 年齢計算パネル -->
+        <section class="tab-panel active" id="panel-age" aria-labelledby="tab-btn-age">
+          <div class="panel-header">
+            <h2 class="panel-title">生年月日からの年齢計算</h2>
+            <p class="panel-desc">生年月日と基準日を指定して満年齢と経過期間を計算します。</p>
+          </div>
+          <form class="calc-form" id="form-age" onsubmit="return false;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="age-birth-date" class="form-label">生年月日 <span class="required">*</span></label>
+                <input type="date" id="age-birth-date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="age-base-date" class="form-label">基準日（初期値：今日）</label>
+                <input type="date" id="age-base-date" class="form-input">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="btn-calc-age">年齢を計算する</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-age">リセット</button>
+            </div>
+          </form>
+
+          <div class="result-box" id="result-age" aria-live="polite">
+            <div class="result-placeholder">生年月日を入力すると結果がここに表示されます</div>
+          </div>
+        </section>
+
+        <!-- 2. 日付計算パネル -->
+        <section class="tab-panel" id="panel-date" aria-labelledby="tab-btn-date">
+          <div class="panel-header">
+            <h2 class="panel-title">指定日数後・前の日付計算</h2>
+            <p class="panel-desc">基準日から○日後、または○日前の正確な日付を計算します。</p>
+          </div>
+          <form class="calc-form" id="form-date" onsubmit="return false;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="date-base-date" class="form-label">基準日 <span class="required">*</span></label>
+                <input type="date" id="date-base-date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="date-days-count" class="form-label">日数 <span class="required">*</span></label>
+                <div class="input-with-suffix">
+                  <input type="number" id="date-days-count" class="form-input" min="0" step="1" value="30" required>
+                  <span class="input-suffix">日</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <span class="form-label">方向</span>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="date-direction" value="after" checked>
+                  <span class="radio-custom"></span> 後（未来）
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="date-direction" value="before">
+                  <span class="radio-custom"></span> 前（過去）
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="btn-calc-date">日付を計算する</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-date">リセット</button>
+            </div>
+          </form>
+
+          <div class="result-box" id="result-date" aria-live="polite">
+            <div class="result-placeholder">基準日と日数を入力すると結果がここに表示されます</div>
+          </div>
+        </section>
+
+        <!-- 3. 期間計算パネル -->
+        <section class="tab-panel" id="panel-period" aria-labelledby="tab-btn-period">
+          <div class="panel-header">
+            <h2 class="panel-title">2つの日付間の期間計算</h2>
+            <p class="panel-desc">開始日と終了日の間の総日数および暦上の期間（○年○か月○日）を計算します。</p>
+          </div>
+          <form class="calc-form" id="form-period" onsubmit="return false;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="period-start-date" class="form-label">開始日 <span class="required">*</span></label>
+                <input type="date" id="period-start-date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="period-end-date" class="form-label">終了日 <span class="required">*</span></label>
+                <input type="date" id="period-end-date" class="form-input" required>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="btn-calc-period">期間を計算する</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-period">リセット</button>
+            </div>
+          </form>
+
+          <div class="result-box" id="result-period" aria-live="polite">
+            <div class="result-placeholder">開始日と終了日を入力すると結果がここに表示されます</div>
+          </div>
+        </section>
+
+        <!-- 4. 時間計算パネル -->
+        <section class="tab-panel" id="panel-time" aria-labelledby="tab-btn-time">
+          <div class="panel-header">
+            <h2 class="panel-title">2つの時刻間の経過時間計算</h2>
+            <p class="panel-desc">開始時刻から終了時刻までの時間・分を計算します。日をまたぐ計算にも対応しています。</p>
+          </div>
+          <form class="calc-form" id="form-time" onsubmit="return false;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="time-start" class="form-label">開始時刻 <span class="required">*</span></label>
+                <input type="time" id="time-start" class="form-input" value="09:00" required>
+              </div>
+              <div class="form-group">
+                <label for="time-end" class="form-label">終了時刻 <span class="required">*</span></label>
+                <input type="time" id="time-end" class="form-input" value="18:00" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="time-next-day" class="checkbox-input">
+                <span class="checkbox-custom"></span>
+                <span>翌日（日付をまたぐ計算）</span>
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="btn-calc-time">時間を計算する</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-time">リセット</button>
+            </div>
+          </form>
+
+          <div class="result-box" id="result-time" aria-live="polite">
+            <div class="result-placeholder">時刻を入力すると結果がここに表示されます</div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p class="footer-text">&copy; 2026 日常計算ツール - 完全クライアントサイド動作 / 外部通信なし</p>
+    </footer>
+  </div>
+
+  <!-- スクリプトの読み込み（ローカル直開き・GitHub Pages両対応） -->
+  <script src="js/utils.js"></script>
+  <script src="js/ageCalc.js"></script>
+  <script src="js/dateCalc.js"></script>
+  <script src="js/periodCalc.js"></script>
+  <script src="js/timeCalc.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
