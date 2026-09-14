@@ -79,3 +79,6 @@
   - `README.md` および `RECORD.md` に公開URL（`https://tk030-lotto.github.io/daily-calculation-tool/`）を記載。
 - **リポジトリのアバウト欄・トピックス設定**:
   - Description（概要文）、Website（公開URL）、Topics（`calculator`, `javascript`, `vanilla-js`, `github-pages`, `client-side`, `tools`）を設定。
+- **note記事・X（旧Twitter）用プロモーションGIFの作成**:
+  - PythonおよびPillowを用いて、16:9比率（1200x675px）のループアニメーションGIF生成スクリプト（`create_promo_gif.py`）を作成。
+  - 4つの計算機能（年齢・日付・期間・時間）のデモと公開URL・特徴をまとめた軽量GIF（`daily_calc_promo.gif`、約203KB）を生成。
