@@ -1,5 +1,8 @@
 # 年齢・日付・期間・時間をまとめて確認できる「日常計算ツール」を作りました
 
+▼ 日常計算ツール（ブラウザですぐに使えます）
+https://tk030-lotto.github.io/daily-calculation-tool/
+
 日常生活では、年齢や日付、期間、時間について確認したいことが意外とあります。
 
 「この日から30日後はいつ？」
@@ -153,3 +156,15 @@ Windows環境では、フォルダ内の**「ツール起動.bat」**をダブ�
 Webブラウザで利用できるほか、GitHub Pagesにも対応しています。
 
 小さなツールですが、日常のちょっとした確認に使ってもらえればと思います。
+
+---
+
+### 関連リンク
+
+▼ 日常計算ツール（Web版）
+https://tk030-lotto.github.io/daily-calculation-tool/
+
+▼ GitHub リポジトリ
+https://github.com/tk030-lotto/daily-calculation-tool
+
+#日常計算ツール #便利ツール #Webツール #JavaScript #個人開発 #GitHub
