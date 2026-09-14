@@ -1,10 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  # 将来的に公開する際は、以下のコメントアウト（#）を外してください。
-  # mainブランチへのプッシュ時に自動デプロイが実行されるようになります。
-  # push:
-  #   branches: ["main"]
+  # mainブランチへのプッシュ時に自動デプロイが実行される設定
+  push:
+    branches: ["main"]
 
   # 手動でデプロイを実行できるようにする設定
   workflow_dispatch:

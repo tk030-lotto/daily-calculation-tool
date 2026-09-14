@@ -10,6 +10,7 @@
 | 目的 | 日常で発生する「年齢」「日付」「期間」「時間」の計算をブラウザ上で完結して行えるツールの提供 |
 | 主要技術 | HTML5, Vanilla CSS, JavaScript (ES6+) |
 | ライセンス | MIT License |
+| 公開URL | [https://tk030-lotto.github.io/daily-calculation-tool/](https://tk030-lotto.github.io/daily-calculation-tool/) |
 
 ---
 
@@ -69,3 +70,10 @@
   - 期間・年齢計算において、特定の日付の組み合わせ（31日と翌月末など）でマイナス日数が表示されるエッジケースバグを特定し、月末日数でキャップする堅牢な計算アルゴリズムに修正（`js/ageCalc.js`, `js/periodCalc.js`）。
   - UIへのXSS対策として、`js/utils.js` に `escapeHTML` を追加し、`js/app.js` の全出力箇所に適用。
   - 修正後、18件の自動テストがすべてPASSすることを確認し、`main` ブランチにコミット。
+
+### 2026-09-15
+- **リポジトリのパブリック化とGitHub Pagesデプロイ**:
+  - GitHub CLI によりリポジトリの可視性を `private` から `public` に変更。
+  - GitHub Pages を GitHub Actions ワークフロー連携方式（`build_type: workflow`）で有効化。
+  - `.github/workflows/deploy-pages.yml` の `push: branches: ["main"]` トリガーを有効化。
+  - `README.md` および `RECORD.md` に公開URL（`https://tk030-lotto.github.io/daily-calculation-tool/`）を記載。

@@ -2,6 +2,8 @@
 
 日常生活で発生する「年齢」「日付」「期間」「時間」に関する計算を、ひとつのWeb画面で完結して行える軽量Webツールです。
 
+- **公開URL (GitHub Pages)**: [https://tk030-lotto.github.io/daily-calculation-tool/](https://tk030-lotto.github.io/daily-calculation-tool/)
+
 電卓では入力や計算が煩雑になりがちな処理を、日付・時刻の直感的な入力のみで即座に算出します。
 
 ## 主な機能
