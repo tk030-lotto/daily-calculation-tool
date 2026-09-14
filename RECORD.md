@@ -77,3 +77,5 @@
   - GitHub Pages を GitHub Actions ワークフロー連携方式（`build_type: workflow`）で有効化。
   - `.github/workflows/deploy-pages.yml` の `push: branches: ["main"]` トリガーを有効化。
   - `README.md` および `RECORD.md` に公開URL（`https://tk030-lotto.github.io/daily-calculation-tool/`）を記載。
+- **リポジトリのアバウト欄・トピックス設定**:
+  - Description（概要文）、Website（公開URL）、Topics（`calculator`, `javascript`, `vanilla-js`, `github-pages`, `client-side`, `tools`）を設定。
