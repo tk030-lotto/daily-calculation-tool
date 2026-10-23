@@ -41,3 +41,6 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 .roorules
+
+# Tests directory
+tests/
