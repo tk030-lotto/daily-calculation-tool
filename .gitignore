@@ -44,4 +44,7 @@ GEMINI.md
 
 # Tests directory
 tests/
-`n# 仕様書除外（フェーズ2-C-β）`nREQUIREMENTS*.md`nSPECIFICATION*.md
+
+# 仕様書除外（フェーズ2-C-β）
+REQUIREMENTS*.md
+SPECIFICATION*.md
