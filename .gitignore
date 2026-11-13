@@ -41,6 +41,8 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 .roorules
+CORE-RULES.md
+UI-STANDARD.md
 
 # Tests directory
 tests/
@@ -48,3 +50,6 @@ tests/
 # 仕様書除外（フェーズ2-C-β）
 REQUIREMENTS*.md
 SPECIFICATION*.md
+
+# レビュー報告書
+PRIMARY-REVIEW*.md
