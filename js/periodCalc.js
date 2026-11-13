@@ -30,34 +30,8 @@
 
       const totalDays = endDays - startDays;
 
-      // 暦上の期間（○年○か月○日）の計算
-      let years = end.year - start.year;
-      let months = end.month - start.month;
-      
-      let prevMonth = end.month - 1;
-      let prevYear = end.year;
-      if (prevMonth < 1) {
-        prevMonth = 12;
-        prevYear--;
-      }
-      const daysInPrevMonth = DateUtils.getDaysInMonth(prevYear, prevMonth);
-      
-      let adjustedStartDay = start.day;
-      if (adjustedStartDay > daysInPrevMonth) {
-        adjustedStartDay = daysInPrevMonth;
-      }
-      
-      let days = end.day - adjustedStartDay;
-
-      if (days < 0) {
-        months--;
-        days += daysInPrevMonth;
-      }
-
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
+      // 暦上の期間（○年○か月○日）の計算（共通関数を使用）
+      const { years, months, days } = DateUtils.calculateCalendarPeriod(start, end);
 
       return {
         totalDays,

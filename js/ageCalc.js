@@ -28,52 +28,9 @@
         return { error: '基準日は生年月日以降の日付を指定してください。' };
       }
 
-      // 満年齢の計算
-      let age = base.year - birth.year;
-      
-      // 平年のうるう年生まれ（2/29）の場合、平年の誕生日基準日は3/1とみなす
-      let birthMonth = birth.month;
-      let birthDay = birth.day;
-      if (birthMonth === 2 && birthDay === 29 && !DateUtils.isLeapYear(base.year)) {
-        birthMonth = 3;
-        birthDay = 1;
-      }
-
-      const isBeforeBirthday = (base.month < birthMonth) ||
-        (base.month === birthMonth && base.day < birthDay);
-
-      if (isBeforeBirthday) {
-        age--;
-      }
-
-      // 経過期間（○年○か月○日）の暦上計算
-      let years = base.year - birth.year;
-      let months = base.month - birth.month;
-      
-      let prevMonth = base.month - 1;
-      let prevYear = base.year;
-      if (prevMonth < 1) {
-        prevMonth = 12;
-        prevYear--;
-      }
-      const daysInPrevMonth = DateUtils.getDaysInMonth(prevYear, prevMonth);
-      
-      let adjustedBirthDay = birth.day;
-      if (adjustedBirthDay > daysInPrevMonth) {
-        adjustedBirthDay = daysInPrevMonth;
-      }
-      
-      let days = base.day - adjustedBirthDay;
-
-      if (days < 0) {
-        months--;
-        days += daysInPrevMonth;
-      }
-
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
+      // 暦上の期間計算（共通関数を使用：平年の2月29日は2月28日へ末日丸め）
+      const { years, months, days } = DateUtils.calculateCalendarPeriod(birth, base);
+      const age = years;
 
       return {
         age,

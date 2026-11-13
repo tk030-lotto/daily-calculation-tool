@@ -71,6 +71,59 @@
     },
 
     /**
+     * 年月日に指定した年数・月数を加算（加算先の月に同じ日が存在しない場合は末日に丸める）
+     * @param {{year: number, month: number, day: number}} date
+     * @param {number} years
+     * @param {number} months
+     * @returns {{year: number, month: number, day: number}}
+     */
+    addYearsMonths(date, years, months) {
+      const totalMonths = (date.year * 12) + (date.month - 1) + (years * 12) + months;
+      const targetYear = Math.floor(totalMonths / 12);
+      const targetMonth = (totalMonths % 12) + 1;
+      const targetDay = Math.min(date.day, this.getDaysInMonth(targetYear, targetMonth));
+      return { year: targetYear, month: targetMonth, day: targetDay };
+    },
+
+    /**
+     * 開始日から終了日までの暦上の期間（○年○か月○日）を計算
+     * 開始日を基準に、年→月→日の順に終点を超えない最大まで加算して求める。
+     * @param {{year: number, month: number, day: number}} start
+     * @param {{year: number, month: number, day: number}} end
+     * @returns {{years: number, months: number, days: number}|null}
+     */
+    calculateCalendarPeriod(start, end) {
+      const startDays = this.toDays(start.year, start.month, start.day);
+      const endDays = this.toDays(end.year, end.month, end.day);
+      if (endDays < startDays) {
+        return null;
+      }
+
+      let years = end.year - start.year;
+      while (years > 0) {
+        const candidate = this.addYearsMonths(start, years, 0);
+        if (this.toDays(candidate.year, candidate.month, candidate.day) <= endDays) {
+          break;
+        }
+        years--;
+      }
+
+      let months = (end.year - start.year - years) * 12 + (end.month - start.month);
+      while (months > 0) {
+        const candidate = this.addYearsMonths(start, years, months);
+        if (this.toDays(candidate.year, candidate.month, candidate.day) <= endDays) {
+          break;
+        }
+        months--;
+      }
+
+      const baseAfterYM = this.addYearsMonths(start, years, months);
+      const days = endDays - this.toDays(baseAfterYM.year, baseAfterYM.month, baseAfterYM.day);
+
+      return { years, months, days };
+    },
+
+    /**
      * XSS対策用のHTMLエスケープ関数
      */
     escapeHTML(str) {
